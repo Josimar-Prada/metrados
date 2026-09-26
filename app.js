@@ -1,8 +1,8 @@
 /* Metrados de obra — app de campo sin conexión para el SISTEMA DE VALORIZACIÓN (Porotobango).
-   Datos solo en el teléfono (IndexedDB). Envío: archivo CSV + fotos por el menú Compartir → OneDrive.
+   Datos solo en el teléfono (IndexedDB). Envío: archivo CSV + fotos por el menú Compartir → Google Drive.
    El Excel los lee con Power Query (hoja CAMPO_DATOS) y los valida con las mismas reglas del ingreso manual. */
 'use strict';
-const APP_VERSION = '1.0.3';
+const APP_VERSION = '1.0.4';
 const CAT_SHEET = 'CATÁLOGO CELULAR';
 const MAX_FOTOS = 3, FOTO_LADO = 1600, FOTO_CAL = 0.72, FOTOS_POR_ENVIO = 6;
 const CSV_COLS = ['ID', 'FECHA', 'CODIGO', 'PPTO', 'FRENTE', 'N_VECES', 'LARGO', 'ANCHO', 'ALTO', 'MET_DIRECTO', 'OBSERVACION',
@@ -349,7 +349,7 @@ async function compartir(files, titulo) {
     catch (e) { if (e.name === 'AbortError') return false; throw e; }
   }
   files.forEach(descargar);   // sin menú compartir: se descarga el archivo
-  return confirm('El archivo se descargó. ¿Ya lo copió a OneDrive → Escritorio → CAMPO POROTOBANGO?');
+  return confirm('El archivo se descargó. ¿Ya lo subió a Google Drive → CAMPO POROTOBANGO?');
 }
 async function enviarDatos() {
   const P = S.prep; if (!P || !P.pend.length) return;
@@ -357,7 +357,7 @@ async function enviarDatos() {
   try {
     const hecho = await compartir([P.file], P.name);   // llamado directo desde el toque (requisito del iPhone)
     if (!hecho) { msg('sendMsg', 'Envío cancelado. Los registros siguen pendientes.', 'warn'); return; }
-    if (!confirm('¿Guardó el archivo en OneDrive → Escritorio → CAMPO POROTOBANGO? (Aceptar = marcar como enviados)')) { msg('sendMsg', 'No se marcó nada: puede volver a enviar.', 'warn'); return; }
+    if (!confirm('¿Guardó el archivo en Google Drive → CAMPO POROTOBANGO? (Aceptar = marcar como enviados)')) { msg('sendMsg', 'No se marcó nada: puede volver a enviar.', 'warn'); return; }
     const lote = { id: uuid(), name: P.name, cuando: ahoraISO(), n: P.pend.length, ids: P.pend.map(r => r.id) };
     for (const r of P.pend) { r.estado = 'enviado'; r.lote = lote.id; await put('recs', r); }
     S.lotes.unshift(lote); await setMeta('lotes', S.lotes.slice(0, 200));

@@ -2,7 +2,7 @@
    Datos solo en el teléfono (IndexedDB). Envío: archivo CSV + fotos por el menú Compartir → Google Drive.
    El Excel los lee con Power Query (hoja CAMPO_DATOS) y los valida con las mismas reglas del ingreso manual. */
 'use strict';
-const APP_VERSION = '1.0.6';
+const APP_VERSION = '1.0.7';
 const CAT_SHEET = 'CATÁLOGO CELULAR';
 const MAX_FOTOS = 3, FOTO_LADO = 1600, FOTO_CAL = 0.72, FOTOS_POR_ENVIO = 6;
 const CSV_COLS = ['ID', 'FECHA', 'CODIGO', 'PPTO', 'FRENTE', 'N_VECES', 'LARGO', 'ANCHO', 'ALTO', 'MET_DIRECTO', 'OBSERVACION',
@@ -304,10 +304,10 @@ async function eliminar(id) {
 }
 function correccion(id) {
   const r = S.recs.find(x => x.id === id); if (!r) return;
-  limpiar(false); cambiarTab('tab-reg'); $('fFecha').value = hoy(); $('fFrente').value = r.frente;
+  limpiar(false); cambiarTab('tab-reg'); $('fFecha').value = r.fecha; $('fFrente').value = r.frente;   // misma fecha (mismo mes) que el registro que corrige
   elegir(r.codigo); setModo('dir'); $('fDirecto').value = -(metradoDe(r) || 0);
   $('fObs').value = `Corrección del registro del ${fechaTxt(r.fecha)} (${fmt(metradoDe(r))})`; recalcular();
-  toast('Ajuste el valor negativo y guarde');
+  toast('Misma fecha del registro corregido. Ajuste el valor negativo y guarde');
 }
 
 /* ---------------- envío ---------------- */

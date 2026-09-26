@@ -1,0 +1,31 @@
+APP «METRADOS DE OBRA» — Porotobango
+====================================
+
+Esta carpeta es la app completa. No contiene datos de la obra: las partidas y saldos
+se cargan en cada teléfono desde el Excel (Ajustes → Actualizar catálogo).
+
+PUBLICARLA GRATIS (una sola vez, 10 minutos, desde la PC)
+1. Cree una cuenta gratuita en https://github.com (solo correo y contraseña).
+2. Botón «+» (arriba a la derecha) → New repository → nombre: metrados → Public → Create repository.
+3. En la página del repositorio: «uploading an existing file» → arrastre TODOS los archivos
+   de esta carpeta → botón «Commit changes».
+4. Settings → Pages → Source: «Deploy from a branch» → Branch: main, carpeta / (root) → Save.
+5. En 1–2 minutos la app queda en:  https://SU-USUARIO.github.io/metrados/
+
+INSTALAR EN EL TELÉFONO (cada persona)
+- iPhone: abrir el enlace en Safari → botón Compartir → «Agregar a pantalla de inicio».
+- Android: abrir el enlace en Chrome → menú ⋮ → «Instalar app».
+- Abrir desde el ícono → Ajustes: escribir su nombre y «Actualizar catálogo desde el Excel»
+  (elegir SISTEMA VALORIZACIÓN POROTOBANGO desde OneDrive/Archivos).
+- Importante en iPhone: úsela desde el ícono de la pantalla de inicio (así el teléfono no borra los datos).
+
+USO DIARIO
+1. Registrar en campo (funciona sin señal).
+2. Con señal: Enviar → «1. Enviar datos» → OneDrive → Escritorio → CAMPO POROTOBANGO.
+   Luego «2. Enviar fotos» a la misma carpeta.
+3. En la PC: abrir el Excel → Datos → Actualizar todo → Guardar.
+4. En el teléfono: Ajustes → Actualizar catálogo (saldos nuevos y registros marcados «en el Excel»).
+
+Para actualizar la app en el futuro: subir los archivos nuevos al mismo repositorio.
+La lectura del Excel usa la librería libre SheetJS (licencia Apache 2.0), que la app descarga
+la primera vez que se abre con señal y luego guarda en el teléfono.

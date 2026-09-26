@@ -1,5 +1,5 @@
 /* Service worker: guarda la app en el teléfono para que abra sin señal. */
-const VERSION = 'metrados-v1.0.5';
+const VERSION = 'metrados-v1.0.6';
 const LIB = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.mini.min.js';
 const FILES = ['./', './index.html', './style.css', './app.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', e => {

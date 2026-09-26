@@ -2,7 +2,7 @@
    Datos solo en el teléfono (IndexedDB). Envío: archivo CSV + fotos por el menú Compartir → Google Drive.
    El Excel los lee con Power Query (hoja CAMPO_DATOS) y los valida con las mismas reglas del ingreso manual. */
 'use strict';
-const APP_VERSION = '1.0.4';
+const APP_VERSION = '1.0.6';
 const CAT_SHEET = 'CATÁLOGO CELULAR';
 const MAX_FOTOS = 3, FOTO_LADO = 1600, FOTO_CAL = 0.72, FOTOS_POR_ENVIO = 6;
 const CSV_COLS = ['ID', 'FECHA', 'CODIGO', 'PPTO', 'FRENTE', 'N_VECES', 'LARGO', 'ANCHO', 'ALTO', 'MET_DIRECTO', 'OBSERVACION',
@@ -97,7 +97,7 @@ async function cargarCatalogo(file) {
       }
       if (r[11]) ids.push(String(r[11]).trim());
     }
-    if (!items.length) throw new Error('No se encontraron partidas en el catálogo.');
+    if (!items.length) throw new Error(rows.length > 50 ? 'El libro no tiene los valores calculados (nunca se guardó en Excel). En la PC: abra el libro en Excel, espere que calcule, use Datos → Actualizar todo, GUARDE (Ctrl+G) y vuelva a cargarlo aquí.' : 'No se encontraron partidas en el catálogo.');
     if (sinValor > items.length / 2) throw new Error('El libro no tiene los saldos calculados. Ábralo en Excel, use Datos → Actualizar todo, GUARDE y vuelva a intentar.');
     const cat = { items, ids, file: file.name, cargado: ahoraISO() };
     await setMeta('cat', cat); aplicarCatalogo(cat);
